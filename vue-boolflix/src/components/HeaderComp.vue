@@ -1,6 +1,6 @@
 <template>
   <header>
-      HW
+      <!-- HW -->
   </header>
 </template>
 

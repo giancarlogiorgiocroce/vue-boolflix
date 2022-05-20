@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderComp />
-    <MainComp />
+    <MainComp :apiArray="this.apiArray"/>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
   },
   data(){
     return{
+      /* Chiamata API */
       apiUrl: 'https://api.themoviedb.org/3/search/movie',
       apiParams:{
         params:{
@@ -29,13 +30,17 @@ export default {
           query: "Mad Max",
         }
       },
+      /* /Chiamata API */
+
+      apiArray: [],
     }
   },
   methods:{
     callApi(){
       axios.get(this.apiUrl, this.apiParams)
       .then(res => {
-        console.log(res.data.results);
+        // console.log(res.data.results);
+        this.apiArray = res.data.results;
       })
       .catch(err => {
         console.log(err);
@@ -46,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'assets/style/global';
-@import 'assets/style/vars';
+@import 'assets/style/_global.scss';
+@import 'assets/style/_vars.scss';
 
 </style>
