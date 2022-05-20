@@ -38,8 +38,8 @@ export default {
 main{
     color: white;
     background-color: $bg-black;
-    height: 100vh;
-    overflow-y: scroll;
+    height: calc(100vh - 75px);
+    overflow-y: hidden;
     .container{
         height: 100%;
         display: flex;

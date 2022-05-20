@@ -17,7 +17,7 @@ export default {
     MainComp
   },
   mounted(){
-    this.callApi();
+    // this.callApi();
   },
   data(){
     return{
