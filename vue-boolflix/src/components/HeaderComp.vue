@@ -3,20 +3,33 @@
         <div class="logo">
             <img src="../assets/image/netflix img.jpg" alt="netflix logo">
         </div>
-        <div class="searchbar">
-            <button>Cerca</button>
-            <input type="text" placeholder="Inserisci un titolo da cercare">
+        <div class="searchbar" @keyup.enter="findMovieOrSerial()">
+            <input v-model="searchInBoolflix" type="text" placeholder="Inserisci un titolo da cercare">
+            <button @click="findMovieOrSerial()">Cerca</button>
         </div>
     </header>
 </template>
 
 <script>
 export default {
-
+    data(){
+        return{
+            searchInBoolflix: "",
+        }
+    },
+    methods:{
+        findMovieOrSerial(){
+            console.log(this.searchInBoolflix, 'lato header funziona');
+            this.$emit ('findMovieOrSerial', this.searchInBoolflix);
+            this.searchInBoolflix = "";
+        }
+    }
 }
 </script>
 
 <style scoped lang="scss">
+@import '../assets/style/vars';
+
 header{
     height: 75px;
     padding: 5px;
@@ -35,12 +48,15 @@ header{
     }
     button,
     input{
-        margin: 0 2rem;
-        padding: .2rem;
-        border-radius: 7.5px;
+        padding: 5px;
     }
     input{
         width: 15vw;
+        border-radius: 7.5px 0 0 7.5px;
+    }
+    button{
+        border-radius: 0 7.5px 7.5px 0;
+        background-color: $netflix-red;
     }
 }
 </style>
