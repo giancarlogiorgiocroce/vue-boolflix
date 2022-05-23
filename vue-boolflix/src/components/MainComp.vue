@@ -47,7 +47,7 @@ main{
             width: 80%;
             height: 36vh;
             margin: 2vh 0;
-            border: solid 2px red ;
+            border: solid 2px $netflix-red ;
 
             display: flex;
             flex-direction: column;
