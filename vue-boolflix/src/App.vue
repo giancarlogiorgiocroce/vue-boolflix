@@ -46,7 +46,7 @@ export default {
       })
     },
     changeApiCall(str){
-      console.log(str, 'il passaggio sta funzionando');
+      // console.log(str, 'il passaggio sta funzionando');
       this.callApi(str);
     }
   }

@@ -2,30 +2,20 @@
 <main>
     <h1>Ecco i titoli che hai chiesto:</h1>
     <div class="container">
-        <ul v-for="(el, i) in apiArray" :key="`apiArray${i}`">
-            <li>
-                <span>Titolo italiano:</span>
-                {{el.title}}
-            </li>
-            <li>
-                <span>Titolo originale:</span>
-                {{el.original_title}}
-            </li>
-            <li>
-                <span>Lingua originale:</span>
-                {{el.original_language}}
-            </li>
-            <li>
-                <span>Voto medio:</span>
-                {{el.vote_average}}
-            </li>
-        </ul>
+        <!-- <div class="row"> -->
+            <MovieCard v-for="(el, i) in apiArray" :key="`apiArray${i}`" :el="el"/>
+        <!-- </div> -->
     </div>
 </main>
 </template>
 
 <script>
+import MovieCard from './MovieCard.vue';
+
 export default {
+    components: {
+        MovieCard,
+    },
     props:{
         apiArray: Array,
     }
@@ -50,15 +40,6 @@ main{
     h1{
         color: $netflix-red;
         margin-bottom: 1rem;
-    }
-}
-ul{
-    margin: 1rem;
-    border-bottom: .5px solid lightgrey;
-    width: calc(50% - 2rem);
-
-    span{
-        color: grey;
     }
 }
 </style>
