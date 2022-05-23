@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderComp @findMovieOrSerial="changeApiCall"/>
-    <MainComp :apiArray="this.apiArray"/>
+    <MainComp :apiMovieArray="this.apiMovieArray" :apiSerialArray="this.apiSerialArray"/>
   </div>
 </template>
 
@@ -17,20 +17,23 @@ export default {
     MainComp
   },
   mounted(){
-    this.callApi('Mad Max');
+    // this.callMovieApi('Mad Max');
   },
   data(){
     return{
       /* Chiamata API */
-      apiUrl: 'https://api.themoviedb.org/3/search/movie',
+      apiMovieUrl: 'https://api.themoviedb.org/3/search/movie',
+      apiSerialUrl: 'https://api.themoviedb.org/3/search/tv',
       /* /Chiamata API */
 
-      apiArray: [],
+      apiMovieArray: [],
+      apiSerialArray: [],
     }
   },
   methods:{
-    callApi(data){
-      axios.get(this.apiUrl, {
+
+    callMovieApi(data){
+      axios.get(this.apiMovieUrl, {
         params:{
           api_key: "0fb42841a10eeeb72a511057dfcd693b",
           language: "it-IT",
@@ -38,16 +41,32 @@ export default {
         }
       })
       .then(res => {
-        // console.log(res.data.results);
-        this.apiArray = res.data.results;
+        this.apiMovieArray = res.data.results;
       })
       .catch(err => {
         console.log(err);
       })
     },
+
+    callSerialApi(data){
+      axios.get(this.apiSerialUrl, {
+        params:{
+          api_key: "0fb42841a10eeeb72a511057dfcd693b",
+          language: "it-IT",
+          query: data,
+        }
+      })
+      .then(r => {
+        this.apiSerialArray = r.data.results;
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    },
+
     changeApiCall(str){
-      // console.log(str, 'il passaggio sta funzionando');
-      this.callApi(str);
+      this.callMovieApi(str);
+      this.callSerialApi(str);
     }
   }
 }

@@ -19,7 +19,6 @@ export default {
     },
     methods:{
         findMovieOrSerial(){
-            console.log(this.searchInBoolflix, 'lato header funziona');
             this.$emit ('findMovieOrSerial', this.searchInBoolflix);
             this.searchInBoolflix = "";
         }

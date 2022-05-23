@@ -2,22 +2,28 @@
 <main>
     <h1>Ecco i titoli che hai chiesto:</h1>
     <div class="container">
-        <!-- <div class="row"> -->
-            <MovieCard v-for="(el, i) in apiArray" :key="`apiArray${i}`" :el="el"/>
-        <!-- </div> -->
+        <div class="row">
+            <MovieCard v-for="(el, i) in apiMovieArray" :key="`apiMovieArray${i}`" :el="el"/>
+        </div>
+        <div class="row">
+            <SerialCard v-for="(el, i) in apiSerialArray" :key="`apiSerialArray${i}`" :el="el"/>
+        </div>
     </div>
 </main>
 </template>
 
 <script>
 import MovieCard from './MovieCard.vue';
+import SerialCard from './SerialCard.vue'
 
 export default {
     components: {
         MovieCard,
+        SerialCard,
     },
     props:{
-        apiArray: Array,
+        apiMovieArray: Array,
+        apiSerialArray: Array,
     }
 
 }
@@ -28,18 +34,31 @@ export default {
 main{
     color: white;
     background-color: $bg-black;
-    height: calc(100vh - 75px);
-    overflow-y: hidden;
+    min-height: calc(100vh - 75px);
+    padding: 20px;
     .container{
         height: 100%;
         display: flex;
-        // flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+
+        .row{
+            padding: 10px;
+            width: 80%;
+            height: 36vh;
+            margin: 2vh 0;
+            border: solid 2px red ;
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            overflow-x: scroll;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
     }
     h1{
         color: $netflix-red;
-        margin-bottom: 1rem;
     }
 }
 </style>

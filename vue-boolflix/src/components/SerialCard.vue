@@ -5,11 +5,11 @@
 <ul>
     <li>
         <span>Titolo italiano:</span>
-        {{el.title}}
+        {{el.name}}
     </li>
     <li>
         <span>Titolo originale:</span>
-        {{el.original_title}}
+        {{el.original_name}}
     </li>
     <li>
         <span>Lingua originale:</span>
