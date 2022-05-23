@@ -53,7 +53,7 @@ main{
             flex-direction: column;
             flex-wrap: wrap;
             overflow-x: scroll;
-            justify-content: space-evenly;
+            justify-content: center;
             align-items: flex-start;
         }
     }
