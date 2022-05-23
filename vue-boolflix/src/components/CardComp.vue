@@ -1,14 +1,17 @@
 <template>
-<div class="box">
-    <div :class="(el.backdrop_path != null) ? `active` : `inactive`" class="img">
+
+<div class="card-box">
+    <div :class="(el.backdrop_path != null) ? `active` : `inactive`" class="image">
         <img :src="`https://image.tmdb.org/t/p/w342/${el.backdrop_path}`">
-        <p>{{el.title}}</p>
+        <p v-if="el.title != undefined">{{el.title}}</p>
+        <p v-else>{{el.name}}</p>
     </div>
 
     <ul :class="(el.backdrop_path == null) ? `active` : `inactive`">
         <li>
             <span>Titolo italiano:</span>
-            {{el.title}}
+            <div v-if="el.title != undefined">{{el.title}}</div>
+            <div v-else>{{el.name}}</div>
         </li>
         <li>
             <span>Titolo originale:</span>
@@ -49,46 +52,49 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.box{
-    width: 342px;
-    height: 192px;
-    margin: 0 10px;
+div.card-box{
+    min-width: 342px;
+    min-height: 192px;
+
     position: relative;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     &:hover ul{
         visibility: visible;
     }
-    &:hover .img{
+    &:hover .image{
         visibility: hidden;
     }
 }
-.img{
-    position: relative;
-
+.image{
     p{
         position: absolute;
         left: 5px;
         bottom: 5px;
-        background: black;
+        padding: 2px;
+        background-color: black;
     }
 }
 ul{
-    overflow-y: auto;
-    visibility: hidden;
-
-    span{
-        color: grey;
-    }
-    div.lang{
-        display: inline;
-        margin-left: 10px;
-    }
-}
-ul,
-.img{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    left: 5%;
+    list-style: none;
+    visibility: hidden;
+    li{
+        margin: 5px;
+        span{
+            color: grey;
+            margin-right: 5px;
+        }
+        div{
+            display: inline;
+        }
+    }
 }
+
 .active{
     visibility: visible;
 }

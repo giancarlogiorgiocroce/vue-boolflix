@@ -1,25 +1,24 @@
 <template>
 <main>
-    <h1>Ecco i titoli che hai chiesto:</h1>
     <div class="container">
-        <div class="row">
-            <MovieCard v-for="(el, i) in apiMovieArray" :key="`apiMovieArray${i}`" :el="el"/>
+        <h1>Ecco i film che hai chiesto:</h1>
+        <div class="row films">
+            <CardComp v-for="(el, i) in apiMovieArray" :key="`apiMovieArray${i}`" :el="el"/>
         </div>
-        <div class="row">
-            <SerialCard v-for="(el, i) in apiSerialArray" :key="`apiSerialArray${i}`" :el="el"/>
+        <h1>Ecco le serie che hai chiesto:</h1>
+        <div class="row serial">
+            <CardComp v-for="(el, i) in apiSerialArray" :key="`apiSerialArray${i}`" :el="el"/>
         </div>
     </div>
 </main>
 </template>
 
 <script>
-import MovieCard from './MovieCard.vue';
-import SerialCard from './SerialCard.vue'
+import CardComp from './CardComp.vue';
 
 export default {
     components: {
-        MovieCard,
-        SerialCard,
+        CardComp,
     },
     props:{
         apiMovieArray: Array,
@@ -36,29 +35,23 @@ main{
     background-color: $bg-black;
     min-height: calc(100vh - 75px);
     padding: 20px;
+    overflow: scroll;
     .container{
         height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-
-        .row{
-            padding: 10px;
-            width: 80%;
-            height: 36vh;
-            margin: 2vh 0;
-            border: solid 2px $netflix-red ;
-
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            overflow-x: scroll;
-            justify-content: center;
-            align-items: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        h1{
+            color: $netflix-red;
+            margin: 3% 0 1% 0;
         }
-    }
-    h1{
-        color: $netflix-red;
+        .row{
+            width: 100%;
+            height: 45%;
+            display: flex;
+        }
     }
 }
 </style>

@@ -18,6 +18,7 @@ export default {
   },
   mounted(){
     this.callMovieApi('Mad Max');
+    this.callSerialApi('Mad Max');
   },
   data(){
     return{
