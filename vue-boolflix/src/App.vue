@@ -17,7 +17,7 @@ export default {
     MainComp
   },
   mounted(){
-    // this.callMovieApi('Mad Max');
+    this.callMovieApi('Mad Max');
   },
   data(){
     return{
