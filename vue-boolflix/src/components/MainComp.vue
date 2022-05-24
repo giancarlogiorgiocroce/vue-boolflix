@@ -1,13 +1,25 @@
 <template>
 <main>
     <div class="container">
-        <h1>Ecco i film che hai chiesto:</h1>
-        <div class="row films">
-            <CardComp v-for="(el, i) in apiMovieArray" :key="`apiMovieArray${i}`" :el="el"/>
+        <div class="row" v-if="apiMovieArray.length == 0 || apiSerialArray.length == 0">
+            <h1>I più visti su Boolflix:</h1>
+            <div class="slider trending">
+                <CardComp v-for="(el, i) in apiTrendingArray" :key="`apiTrendingArray${i}`" :el="el"/>
+            </div>
         </div>
-        <h1>Ecco le serie che hai chiesto:</h1>
-        <div class="row serial">
-            <CardComp v-for="(el, i) in apiSerialArray" :key="`apiSerialArray${i}`" :el="el"/>
+
+        <div class="row" v-if="apiMovieArray.length > 0">
+            <h1>Ecco i film che hai chiesto:</h1>
+            <div class="slider films">
+                <CardComp v-for="(el, i) in apiMovieArray" :key="`apiMovieArray${i}`" :el="el"/>
+            </div>
+        </div>
+
+        <div class="row" v-if="apiSerialArray.length > 0">
+            <h1>Ecco le serie che hai chiesto:</h1>
+            <div class="slider serial">
+                <CardComp v-for="(el, i) in apiSerialArray" :key="`apiSerialArray${i}`" :el="el"/>
+            </div>
         </div>
     </div>
 </main>
@@ -23,6 +35,7 @@ export default {
     props:{
         apiMovieArray: Array,
         apiSerialArray: Array,
+        apiTrendingArray: Array,
     }
 
 }
@@ -35,7 +48,7 @@ main{
     background-color: $bg-black;
     min-height: calc(100vh - 75px);
     padding: 20px;
-    overflow: scroll;
+    overflow-x: scroll;
     .container{
         height: 100%;
         width: 100%;
@@ -45,9 +58,9 @@ main{
         flex-wrap: wrap;
         h1{
             color: $netflix-red;
-            margin: 3% 0 1% 0;
+            margin: 25px 0;
         }
-        .row{
+        .slider{
             width: 100%;
             height: 45%;
             display: flex;

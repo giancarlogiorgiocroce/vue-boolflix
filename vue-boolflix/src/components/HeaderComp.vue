@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="logo">
-            <img src="../assets/image/netflix img.jpg" alt="netflix logo">
+            <img src="../assets/image/Boolflix.png" alt="netflix logo">
         </div>
         <div class="searchbar" @keyup.enter="findMovieOrSerial()">
             <input v-model="searchInBoolflix" type="text" placeholder="Inserisci un titolo da cercare">

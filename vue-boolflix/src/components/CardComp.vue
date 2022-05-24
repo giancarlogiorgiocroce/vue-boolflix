@@ -3,15 +3,13 @@
 <div class="card-box">
     <div :class="(el.backdrop_path != null) ? `active` : `inactive`" class="image">
         <img :src="`https://image.tmdb.org/t/p/w342/${el.backdrop_path}`">
-        <p v-if="el.title != undefined">{{el.title}}</p>
-        <p v-else>{{el.name}}</p>
+        <p>{{el.title || el.name}}</p>
     </div>
 
     <ul :class="(el.backdrop_path == null) ? `active` : `inactive`">
         <li>
             <span>Titolo italiano:</span>
-            <div v-if="el.title != undefined">{{el.title}}</div>
-            <div v-else>{{el.name}}</div>
+            <div>{{el.title || el.name}}</div>
         </li>
         <li>
             <span>Titolo originale:</span>
@@ -52,6 +50,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/style/vars';
+
 div.card-box{
     min-width: 342px;
     min-height: 192px;
@@ -80,9 +80,9 @@ div.card-box{
 }
 ul{
     position: absolute;
-    left: 5%;
     list-style: none;
     visibility: hidden;
+
     li{
         margin: 5px;
         span{
