@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderComp @findMovieOrSerial="changeApiCall"/>
-    <MainComp :apiMovieArray="this.apiMovieArray" :apiSerialArray="this.apiSerialArray" :apiTrendingArray="this.apiTrendingArray"/>
+    <MainComp :movie="this.movie" :tv="this.tv" :apiTrendingArray="this.apiTrendingArray"/>
   </div>
 </template>
 
@@ -21,26 +21,42 @@ export default {
   },
   data(){
     return{
-      /* Chiamata API */
-      apiMovieUrl: 'https://api.themoviedb.org/3/search/movie',
-      apiSerialUrl: 'https://api.themoviedb.org/3/search/tv',
+      apiUrl: 'https://api.themoviedb.org/3/search/',
       apiTrendingUrl: 'https://api.themoviedb.org/3/movie/popular',
-      // apiUrl: 'https://api.themoviedb.org/3/search/',
-      /* /Chiamata API */
 
-      apiMovieArray: [],
-      apiSerialArray: [],
+      movie: [],
+      tv: [],
       apiTrendingArray: []
     }
   },
   methods:{
 
+    callApi(data, type){
+      axios.get(this.apiUrl + type, {
+        params:{
+          api_key: "0fb42841a10eeeb72a511057dfcd693b",
+          language: "it-IT",
+          query: data,
+        }
+      })
+      .then(res => {
+        this[type] = res.data.results;
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
+    
+    changeApiCall(str){
+      this.callApi(str, 'movie');
+      this.callApi(str, 'tv');
+    },
+
     callTrendingApi(){
       axios.get(this.apiTrendingUrl, {
         params:{
           api_key: "0fb42841a10eeeb72a511057dfcd693b",
-          media_type: 'tv',
-          time_window: 'week',
+          language: "it-IT",
         }
       })
       .then(response => {
@@ -50,61 +66,6 @@ export default {
         console.log(error);
       })
     },
-
-    callMovieApi(data){
-      axios.get(this.apiMovieUrl, {
-        params:{
-          api_key: "0fb42841a10eeeb72a511057dfcd693b",
-          language: "it-IT",
-          query: data,
-        }
-      })
-      .then(res => {
-        this.apiMovieArray = res.data.results;
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    },
-
-    callSerialApi(data){
-      axios.get(this.apiSerialUrl, {
-        params:{
-          api_key: "0fb42841a10eeeb72a511057dfcd693b",
-          language: "it-IT",
-          query: data,
-        }
-      })
-      .then(r => {
-        this.apiSerialArray = r.data.results;
-      })
-      .catch(e => {
-        console.log(e);
-      })
-    },
-
-    changeApiCall(str){
-      this.callMovieApi(str);
-      this.callSerialApi(str);
-      // this.callApi(str, 'Serial');
-      // this.callApi(str, 'Movie');
-    }
-
-    // callApi(data, type){
-    //   axios.get(this.apiMovieUrl + type, {
-    //     params:{
-    //       api_key: "0fb42841a10eeeb72a511057dfcd693b",
-    //       language: "it-IT",
-    //       query: data,
-    //     }
-    //   })
-    //   .then(res => {
-    //     this[`api${type}Array`] = res.data.results;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    // },
   }
 }
 </script>

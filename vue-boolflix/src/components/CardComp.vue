@@ -23,12 +23,9 @@
         </li>
         <li>
             <span>Voto medio:</span>
-            <div class="stars" v-if="parseInt(el.vote_average)/2 > 4"> <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> </div>
-            <div class="stars" v-else-if="parseInt(el.vote_average)/2 > 3"> <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> </div>
-            <div class="stars" v-else-if="parseInt(el.vote_average)/2 > 2"> <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i> </div>
-            <div class="stars" v-else-if="parseInt(el.vote_average)/2 > 1"> <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i> </div>
-            <div class="stars" v-else-if="parseInt(el.vote_average)/2 > 0"> <i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i> </div>
-            <div class="stars" v-else-if="parseInt(el.vote_average)/2 == 0"> <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i> </div>
+            <div class="stars"> 
+                <i v-for="(str, i) in trasformIntoStars(el.vote_average)" :key="`starsArray${i}`" :class="`fa-${str} fa-star`"></i> 
+            </div>
         </li>
     </ul>
 </div>
@@ -45,6 +42,25 @@ export default {
     props:{
         el: Object,
     },
+    methods:{
+        trasformIntoStars(vote){
+            const solid = 'solid';
+            const regular = 'regular';
+            const maxVote = 5;
+
+            let starsArray = [];
+            let numberOfFullStars = Math.floor(vote / 2);
+
+            for(let i = 0; i < numberOfFullStars; i++){
+                starsArray.push(solid);
+            }
+            for(let i = 0; i < maxVote-numberOfFullStars; i++){
+                starsArray.push(regular);
+            }
+            
+            return starsArray;
+        }
+    }
 
 }
 </script>

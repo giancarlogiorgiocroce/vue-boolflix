@@ -1,24 +1,24 @@
 <template>
 <main>
     <div class="container">
-        <div class="row" v-if="apiMovieArray.length == 0 || apiSerialArray.length == 0">
+        <div class="row" v-if="movie.length == 0 || tv.length == 0">
             <h1>I più visti su Boolflix:</h1>
             <div class="slider trending">
                 <CardComp v-for="(el, i) in apiTrendingArray" :key="`apiTrendingArray${i}`" :el="el"/>
             </div>
         </div>
 
-        <div class="row" v-if="apiMovieArray.length > 0">
+        <div class="row" v-if="movie.length > 0">
             <h1>Ecco i film che hai chiesto:</h1>
             <div class="slider films">
-                <CardComp v-for="(el, i) in apiMovieArray" :key="`apiMovieArray${i}`" :el="el"/>
+                <CardComp v-for="(el, i) in movie" :key="`movie${i}`" :el="el"/>
             </div>
         </div>
 
-        <div class="row" v-if="apiSerialArray.length > 0">
+        <div class="row" v-if="tv.length > 0">
             <h1>Ecco le serie che hai chiesto:</h1>
             <div class="slider serial">
-                <CardComp v-for="(el, i) in apiSerialArray" :key="`apiSerialArray${i}`" :el="el"/>
+                <CardComp v-for="(el, i) in tv" :key="`tv${i}`" :el="el"/>
             </div>
         </div>
     </div>
@@ -33,8 +33,8 @@ export default {
         CardComp,
     },
     props:{
-        apiMovieArray: Array,
-        apiSerialArray: Array,
+        movie: Array,
+        tv: Array,
         apiTrendingArray: Array,
     }
 
